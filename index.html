@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Page Title</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@2.5.8/dist/vuetify.min.css">
+    </head>
+    
+    <body>
+    <div id="app">
+        <v-app id="get_reviewers">
+          <v-container>
+            <v-form ref="form">
+              <v-row>
+                <v-col cols="12" sm="6">
+                  <v-combobox v-model="selectedCandidates" :items="allCandidates" label="Candidates" :rules="[(v) => v.length > 0 || 'Candidate is required']" required multiple small-chips></v-combobox>
+                </v-col>
+                <v-col cols="12" sm="6">
+                  <v-select v-model="numOfReviewers" :items="reviewerCountList" label="Number of reviewers" :rules="[(v) => v <= selectedCandidates.length || 'Number of reviewers is not valid']"></v-select>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12" sm="12">
+                  <v-btn block @click="getRandomReviewers">
+                    Get {{numOfReviewers}} Reviewers Randomly
+                  </v-btn>
+                </v-col>
+      
+                <v-col cols="12" sm="12">
+                  <v-text-field label="Final Reviewers" v-model="finalReviewers" v-if="isFinalReviewersShown"></v-text-field>
+                </v-col>
+              </v-row>
+            </v-form>
+          </v-container>
+        </v-app>
+      </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vuetify@2.5.8/dist/vuetify.min.js"></script>
+      <script src="./GetCodeReviewers.js"></script> 
+    </body>
+</html>
+
+
